@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const Hero = () => {
+  const scrollToQuoteForm = () => {
+    const quoteForm = document.getElementById('quote-form');
+    if (quoteForm) {
+      quoteForm.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="min-h-[80vh] flex flex-col bg-gradient-to-b from-white to-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="py-6">
@@ -24,6 +31,7 @@ export const Hero = () => {
           <Button
             size="lg"
             className="group bg-primary hover:bg-primary/90 text-white px-8 py-6 rounded-full text-lg transition-all duration-300 hover:shadow-lg"
+            onClick={scrollToQuoteForm}
           >
             Get Your Free Consultation Today
             <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
