@@ -20,6 +20,10 @@ const services = [
   },
 ];
 
+const partners = [
+  "Tesla", "Boeing", "SpaceX", "General Electric", "Ford", "Toyota"
+];
+
 export const Services = () => {
   return (
     <section className="py-24 bg-gray-50 px-4 sm:px-6 lg:px-8">
@@ -27,7 +31,7 @@ export const Services = () => {
         <h2 className="text-3xl font-bold text-center text-accent mb-16">
           Full-Cycle Innovation, Tailored to You
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
           {services.map((service, index) => (
             <Card
               key={index}
@@ -45,6 +49,23 @@ export const Services = () => {
               </p>
             </Card>
           ))}
+        </div>
+
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-accent mb-8">
+            Trusted By Industry Leaders
+          </h2>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {partners.map((partner, index) => (
+              <div
+                key={index}
+                className="text-xl font-semibold text-gray-600 hover:text-primary transition-colors duration-300"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {partner}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
