@@ -6,7 +6,7 @@ export const Hero = () => {
   return (
     <section className="min-h-[80vh] flex flex-col bg-gradient-to-b from-white to-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="py-6">
-        <h2 className="text-2xl font-bold text-primary">DFM Fusion</h2>
+        <h2 className="text-2xl font-bold text-primary">FusionLabs</h2>
       </div>
       <div className="flex-1 flex items-center justify-center">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
