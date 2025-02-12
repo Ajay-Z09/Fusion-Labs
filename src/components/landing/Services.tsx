@@ -21,7 +21,10 @@ const services = [
 ];
 
 const partners = [
-  "Tesla", "Boeing", "SpaceX", "General Electric", "Ford", "Toyota"
+  {
+    name: "Honeywell",
+    logo: "/lovable-uploads/39cdaa10-b41b-4942-864d-b29dd8610f0a.png",
+  }
 ];
 
 export const Services = () => {
@@ -59,10 +62,14 @@ export const Services = () => {
             {partners.map((partner, index) => (
               <div
                 key={index}
-                className="text-xl font-semibold text-gray-600 hover:text-primary transition-colors duration-300"
+                className="h-12 transition-transform duration-300 hover:scale-105"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                {partner}
+                <img 
+                  src={partner.logo} 
+                  alt={`${partner.name} logo`} 
+                  className="h-full w-auto object-contain"
+                />
               </div>
             ))}
           </div>
