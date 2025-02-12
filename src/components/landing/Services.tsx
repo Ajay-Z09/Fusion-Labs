@@ -62,7 +62,7 @@ export const Services = () => {
             {partners.map((partner, index) => (
               <div
                 key={index}
-                className="h-12 transition-transform duration-300 hover:scale-105"
+                className="h-24 transition-transform duration-300 hover:scale-105"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <img 
