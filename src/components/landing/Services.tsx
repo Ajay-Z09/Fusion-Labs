@@ -1,17 +1,23 @@
 
 import { Card } from "@/components/ui/card";
-import { Layers, TestTube2, Settings, Pencil, Factory } from "lucide-react";
+import { Layers, TestTube2, Settings, Check } from "lucide-react";
 
 const coreServices = [
   {
     title: "Design and DFM Analysis",
-    description: "Expert design optimization and manufacturability analysis to ensure successful production outcomes.",
-    icon: Pencil,
+    description: [
+      "Expert design optimization",
+      "Manufacturability analysis",
+      "Production outcome assurance"
+    ]
   },
   {
     title: "On-Demand Manufacturing",
-    description: "Flexible manufacturing solutions tailored to your specific needs and timeline.",
-    icon: Factory,
+    description: [
+      "Flexible manufacturing solutions",
+      "Customized production timelines",
+      "Scalable capacity"
+    ]
   },
 ];
 
@@ -51,18 +57,20 @@ export const Services = () => {
           {coreServices.map((service, index) => (
             <Card
               key={index}
-              className="p-8 hover:shadow-lg transition-shadow duration-300 animate-fade-in cursor-pointer group"
+              className="p-8 hover:shadow-lg transition-shadow duration-300 animate-fade-in cursor-pointer"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
-                <service.icon className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-accent mb-4">
+              <h3 className="text-xl font-semibold text-accent mb-6">
                 {service.title}
               </h3>
-              <p className="text-gray-600">
-                {service.description}
-              </p>
+              <ul className="space-y-3">
+                {service.description.map((item, idx) => (
+                  <li key={idx} className="flex items-center space-x-3">
+                    <Check className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-gray-600">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </Card>
           ))}
         </div>
