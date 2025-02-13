@@ -131,14 +131,19 @@ export const QuoteForm = () => {
             <FormField
               control={form.control}
               name="cadFile"
-              render={({ field: { onChange, ...field } }) => (
+              render={({ field: { value, onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel>Upload CAD File</FormLabel>
                   <FormControl>
                     <Input
                       type="file"
                       accept=".stl,.obj,.step,.stp,.iges,.igs,.dwg,.dxf"
-                      onChange={(e) => onChange(e.target.files)}
+                      onChange={(e) => {
+                        const files = e.target.files;
+                        if (files?.length) {
+                          onChange(files);
+                        }
+                      }}
                       {...field}
                     />
                   </FormControl>
