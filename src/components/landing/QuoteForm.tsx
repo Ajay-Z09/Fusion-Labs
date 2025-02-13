@@ -7,15 +7,26 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   company: z.string().min(1, "Company name is required"),
+  projectStage: z.string().min(1, "Please select a project stage"),
+  cadFile: z.instanceof(FileList).optional(),
   projectDetails: z.string().min(10, "Please provide more details about your project"),
 });
 
 type QuoteFormValues = z.infer<typeof formSchema>;
+
+const projectStages = [
+  "Initial Concept",
+  "Design Phase",
+  "Prototype Ready",
+  "Production Ready",
+  "Seeking Manufacturing Partner"
+];
 
 export const QuoteForm = () => {
   const { toast } = useToast();
@@ -26,6 +37,7 @@ export const QuoteForm = () => {
       name: "",
       email: "",
       company: "",
+      projectStage: "",
       projectDetails: "",
     },
   });
@@ -85,6 +97,50 @@ export const QuoteForm = () => {
                   <FormLabel>Company</FormLabel>
                   <FormControl>
                     <Input placeholder="Your company name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="projectStage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Project Stage</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your project stage" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {projectStages.map((stage) => (
+                        <SelectItem key={stage} value={stage}>
+                          {stage}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="cadFile"
+              render={({ field: { onChange, ...field } }) => (
+                <FormItem>
+                  <FormLabel>Upload CAD File (Optional)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="file"
+                      accept=".stl,.obj,.step,.stp,.iges,.igs,.dwg,.dxf"
+                      onChange={(e) => onChange(e.target.files)}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
