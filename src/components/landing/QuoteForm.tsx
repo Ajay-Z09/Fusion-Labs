@@ -133,7 +133,7 @@ export const QuoteForm = () => {
               name="cadFile"
               render={({ field: { onChange, ...field } }) => (
                 <FormItem>
-                  <FormLabel>Upload CAD File (Optional)</FormLabel>
+                  <FormLabel>Upload CAD File</FormLabel>
                   <FormControl>
                     <Input
                       type="file"
