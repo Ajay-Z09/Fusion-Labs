@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Search, Printer3d, Factory, CheckCircle2 } from "lucide-react";
+import { Search, Printer, Factory, CheckCircle2 } from "lucide-react";
 
 const serviceFeatures = {
   dfm: [
@@ -50,7 +50,7 @@ export const Services = () => {
             <div className="flex items-center space-x-4 mb-6">
               <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center">
                 <Search className="h-6 w-6 text-primary" />
-                <Printer3d className="h-6 w-6 text-primary ml-[-8px]" />
+                <Printer className="h-6 w-6 text-primary ml-[-8px]" />
               </div>
               <h3 className="text-2xl font-semibold text-accent">
                 Design for Manufacturability (DFM) & Rapid Prototyping
