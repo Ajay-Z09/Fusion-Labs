@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { pricingTiers } from "./PricingTiers";
 import { PricingCards } from "./PricingCards";
 import { PricingComparisonTable } from "./PricingComparisonTable";
 import { TrustBadges } from "./TrustBadges";
