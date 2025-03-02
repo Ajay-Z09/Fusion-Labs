@@ -95,39 +95,6 @@ const WhyChooseUs = () => {
           ))}
         </div>
 
-        {/* Trust Bar */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            <div className="flex flex-wrap justify-center gap-4 items-center">
-              <span className="text-sm font-medium text-gray-500">TRUSTED BY</span>
-              <div className="flex flex-wrap gap-4 justify-center">
-                {/* Replace with actual company logos */}
-                <div className="h-8 w-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Company 1</div>
-                <div className="h-8 w-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Company 2</div>
-                <div className="h-8 w-20 bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">Company 3</div>
-              </div>
-            </div>
-            
-            <div className="flex flex-wrap justify-center gap-4 items-center">
-              <span className="text-sm font-medium text-gray-500">CERTIFICATIONS</span>
-              <div className="flex flex-wrap gap-2 justify-center">
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">ISO 9001</span>
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">AS9100</span>
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">FDA-compliant</span>
-              </div>
-            </div>
-            
-            <div className="flex justify-center items-center">
-              <div className="text-center">
-                <div className="text-sm font-medium text-gray-500 mb-1">LIVE COUNTER</div>
-                <div className="text-lg font-semibold text-accent">
-                  12 prototypes in progress | 27 shipped today
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div className="mt-12 text-center">
           <Button 
             size="lg" 
