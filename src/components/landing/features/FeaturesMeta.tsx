@@ -4,7 +4,6 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { PricingCards } from "./PricingCards";
 import { PricingComparisonTable } from "./PricingComparisonTable";
 import { TrustBadges } from "./TrustBadges";
-import { PricingCalculator } from "./PricingCalculator";
 import { FinalCTA } from "./FinalCTA";
 
 export const FeaturesMeta = () => {
@@ -42,9 +41,6 @@ export const FeaturesMeta = () => {
 
         {/* Trust-Building Elements */}
         <TrustBadges />
-        
-        {/* Interactive Pricing Calculator */}
-        <PricingCalculator scrollToQuoteForm={scrollToQuoteForm} />
         
         {/* Final CTA Section */}
         <FinalCTA scrollToQuoteForm={scrollToQuoteForm} />
