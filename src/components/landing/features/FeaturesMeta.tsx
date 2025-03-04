@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { PricingCards } from "./PricingCards";
 import { PricingComparisonTable } from "./PricingComparisonTable";
-import { TrustBadges } from "./TrustBadges";
 import { FinalCTA } from "./FinalCTA";
 
 export const FeaturesMeta = () => {
@@ -38,9 +37,6 @@ export const FeaturesMeta = () => {
         ) : (
           <PricingComparisonTable scrollToQuoteForm={scrollToQuoteForm} />
         )}
-
-        {/* Trust-Building Elements */}
-        <TrustBadges />
         
         {/* Final CTA Section */}
         <FinalCTA scrollToQuoteForm={scrollToQuoteForm} />
