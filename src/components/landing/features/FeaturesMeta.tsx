@@ -1,8 +1,9 @@
+
 import React, { useState } from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { PricingCards } from "./PricingCards";
 import { PricingComparisonTable } from "./PricingComparisonTable";
-import { FinalCTA } from "./FinalCTA";
+
 export const FeaturesMeta = () => {
   const [viewMode, setViewMode] = useState<string>("cards");
   const scrollToQuoteForm = () => {
@@ -30,9 +31,6 @@ export const FeaturesMeta = () => {
         </div>
 
         {viewMode === "cards" ? <PricingCards scrollToQuoteForm={scrollToQuoteForm} /> : <PricingComparisonTable scrollToQuoteForm={scrollToQuoteForm} />}
-        
-        {/* Final CTA Section */}
-        <FinalCTA scrollToQuoteForm={scrollToQuoteForm} />
       </div>
     </section>;
 };
