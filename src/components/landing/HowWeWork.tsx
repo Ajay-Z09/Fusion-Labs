@@ -238,7 +238,7 @@ const HowWeWork = () => {
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Package className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Idea </span>
+                        <span className="text-sm font-medium mt-2">Design</span>
                         <span className="text-xs text-gray-500">1-10 units</span>
                       </div>
                       
