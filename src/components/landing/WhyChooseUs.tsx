@@ -1,8 +1,6 @@
-
 import React from "react";
 import { Award, DollarSign, Leaf, Lock, Rocket, Lightbulb } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 const WhyChooseUs = () => {
   const differentiators = [
@@ -56,11 +54,6 @@ const WhyChooseUs = () => {
     }
   ];
 
-  const scrollToQuoteForm = () => {
-    const quoteForm = document.getElementById('quote-form');
-    quoteForm?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="py-20 bg-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -93,16 +86,6 @@ const WhyChooseUs = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button 
-            size="lg" 
-            onClick={scrollToQuoteForm}
-            className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-md font-medium"
-          >
-            Get Your Free Quote Today
-          </Button>
         </div>
       </div>
     </section>
