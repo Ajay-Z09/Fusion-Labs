@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Upload, Database, BarChart, Printer, Factory, Video, Package, ShieldCheck, ArrowRight, CheckCircle2, ToggleLeft, ToggleRight, PenTool } from "lucide-react";
+import { Upload, Database, BarChart, Printer, Factory, Video, Package, ShieldCheck, ArrowRight, CheckCircle2, ToggleLeft, ToggleRight, PenTool, Layers } from "lucide-react";
 
 const HowWeWork = () => {
   const [activePrototypingMethod, setActivePrototypingMethod] = useState<"printing" | "cnc" | "sheet">("printing");
@@ -250,7 +250,7 @@ const HowWeWork = () => {
                       transform: "translateX(-50%)"
                     }}>
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
-                          <Package className="h-5 w-5" />
+                          <Layers className="h-5 w-5" />
                         </div>
                         <span className="text-sm font-medium mt-2">Prototype</span>
                         {/* Removed the units text */}
