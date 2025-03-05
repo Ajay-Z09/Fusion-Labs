@@ -1,22 +1,7 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  Upload, 
-  Database, 
-  BarChart, 
-  Printer, 
-  Factory, 
-  Video, 
-  Package, 
-  ShieldCheck, 
-  ArrowRight, 
-  CheckCircle2,
-  ToggleLeft,
-  ToggleRight
-} from "lucide-react";
-
+import { Upload, Database, BarChart, Printer, Factory, Video, Package, ShieldCheck, ArrowRight, CheckCircle2, ToggleLeft, ToggleRight } from "lucide-react";
 const HowWeWork = () => {
   const [activePrototypingMethod, setActivePrototypingMethod] = useState<"printing" | "cnc" | "sheet">("printing");
   const [count, setCount] = useState(527);
@@ -26,8 +11,7 @@ const HowWeWork = () => {
     setCount(prevCount => prevCount + 1);
   }, 30000); // Increment every 30 seconds
 
-  return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50 px-4 sm:px-6 lg:px-8">
+  return <section className="py-24 bg-gradient-to-b from-white to-gray-50 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
@@ -62,14 +46,18 @@ const HowWeWork = () => {
             </Button>
           </div>
           
-          <div className="relative rounded-xl overflow-hidden shadow-lg h-80 animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="relative rounded-xl overflow-hidden shadow-lg h-80 animate-slide-up" style={{
+          animationDelay: "200ms"
+        }}>
             <div className="absolute inset-0 flex">
               <div className="w-1/2 bg-gray-100 flex items-center justify-center p-6 relative">
                 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="Original CAD design" className="max-h-full object-contain" />
                 <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-md shadow text-xs font-medium">Original Design</div>
               </div>
               <div className="w-1/2 bg-gray-50 flex items-center justify-center p-6 relative">
-                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="AI-optimized design" className="max-h-full object-contain opacity-90" style={{ filter: "hue-rotate(120deg)" }} />
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="AI-optimized design" className="max-h-full object-contain opacity-90" style={{
+                filter: "hue-rotate(120deg)"
+              }} />
                 <div className="absolute bottom-4 right-4 bg-primary px-3 py-1 rounded-md shadow text-xs font-medium text-white">AI-Optimized</div>
               </div>
             </div>
@@ -84,31 +72,21 @@ const HowWeWork = () => {
           <div className="order-2 lg:order-1 relative rounded-xl overflow-hidden shadow-lg h-80 animate-slide-up">
             <div className="absolute inset-0 bg-gray-100 flex flex-col">
               <div className="flex justify-center space-x-4 p-4 bg-white border-b">
-                <button 
-                  onClick={() => setActivePrototypingMethod("printing")}
-                  className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "printing" ? "bg-primary text-white" : "bg-gray-100"}`}
-                >
+                <button onClick={() => setActivePrototypingMethod("printing")} className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "printing" ? "bg-primary text-white" : "bg-gray-100"}`}>
                   <Printer className="h-4 w-4 mr-2" />
                   3D Printing
                 </button>
-                <button
-                  onClick={() => setActivePrototypingMethod("cnc")}
-                  className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "cnc" ? "bg-primary text-white" : "bg-gray-100"}`}
-                >
+                <button onClick={() => setActivePrototypingMethod("cnc")} className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "cnc" ? "bg-primary text-white" : "bg-gray-100"}`}>
                   <Factory className="h-4 w-4 mr-2" />
                   CNC Machining
                 </button>
-                <button
-                  onClick={() => setActivePrototypingMethod("sheet")}
-                  className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "sheet" ? "bg-primary text-white" : "bg-gray-100"}`}
-                >
+                <button onClick={() => setActivePrototypingMethod("sheet")} className={`flex items-center px-3 py-2 rounded ${activePrototypingMethod === "sheet" ? "bg-primary text-white" : "bg-gray-100"}`}>
                   <Factory className="h-4 w-4 mr-2" />
                   Sheet Metal
                 </button>
               </div>
               <div className="flex-1 p-6 flex items-center justify-center">
-                {activePrototypingMethod === "printing" && (
-                  <div className="text-center">
+                {activePrototypingMethod === "printing" && <div className="text-center">
                     <h4 className="font-bold mb-2">SLA/FDM 3D Printing</h4>
                     <ul className="text-left text-sm space-y-2">
                       <li className="flex items-start">
@@ -128,10 +106,8 @@ const HowWeWork = () => {
                         <span>24-48 hour turnaround time</span>
                       </li>
                     </ul>
-                  </div>
-                )}
-                {activePrototypingMethod === "cnc" && (
-                  <div className="text-center">
+                  </div>}
+                {activePrototypingMethod === "cnc" && <div className="text-center">
                     <h4 className="font-bold mb-2">5-Axis CNC Machining</h4>
                     <ul className="text-left text-sm space-y-2">
                       <li className="flex items-start">
@@ -151,10 +127,8 @@ const HowWeWork = () => {
                         <span>36-72 hour turnaround time</span>
                       </li>
                     </ul>
-                  </div>
-                )}
-                {activePrototypingMethod === "sheet" && (
-                  <div className="text-center">
+                  </div>}
+                {activePrototypingMethod === "sheet" && <div className="text-center">
                     <h4 className="font-bold mb-2">Precision Sheet Metal</h4>
                     <ul className="text-left text-sm space-y-2">
                       <li className="flex items-start">
@@ -174,8 +148,7 @@ const HowWeWork = () => {
                         <span>48-96 hour turnaround time</span>
                       </li>
                     </ul>
-                  </div>
-                )}
+                  </div>}
               </div>
               <div className="bg-gray-900 text-white px-4 py-3 flex justify-between items-center">
                 <div className="flex items-center">
@@ -187,7 +160,9 @@ const HowWeWork = () => {
             </div>
           </div>
           
-          <div className="order-1 lg:order-2 space-y-6 animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="order-1 lg:order-2 space-y-6 animate-slide-up" style={{
+          animationDelay: "200ms"
+        }}>
             <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary font-medium mb-2">
               <span className="mr-2 h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-sm">2</span>
               Step Two
@@ -242,7 +217,9 @@ const HowWeWork = () => {
             </Button>
           </div>
           
-          <div className="relative rounded-xl overflow-hidden shadow-lg p-6 bg-white h-80 animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="relative rounded-xl overflow-hidden shadow-lg p-6 bg-white h-80 animate-slide-up" style={{
+          animationDelay: "200ms"
+        }}>
             <div className="absolute inset-0 p-6">
               <div className="h-full flex flex-col">
                 <h4 className="font-bold text-center mb-6">Production Roadmap</h4>
@@ -250,29 +227,41 @@ const HowWeWork = () => {
                   <div className="w-full">
                     <div className="relative">
                       <div className="h-2 bg-gray-200 rounded-full w-full"></div>
-                      <div className="absolute h-2 bg-primary rounded-full" style={{ width: "100%" }}></div>
+                      <div className="absolute h-2 bg-primary rounded-full" style={{
+                      width: "100%"
+                    }}></div>
                       
-                      <div className="absolute flex flex-col items-center" style={{ left: "0%", top: "-40px" }}>
+                      <div className="absolute flex flex-col items-center" style={{
+                      left: "0%",
+                      top: "-40px"
+                    }}>
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Package className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Prototype</span>
+                        <span className="text-sm font-medium mt-2">Idea </span>
                         <span className="text-xs text-gray-500">1-10 units</span>
                       </div>
                       
-                      <div className="absolute flex flex-col items-center" style={{ left: "50%", top: "-40px", transform: "translateX(-50%)" }}>
+                      <div className="absolute flex flex-col items-center" style={{
+                      left: "50%",
+                      top: "-40px",
+                      transform: "translateX(-50%)"
+                    }}>
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Package className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Batch</span>
+                        <span className="text-sm font-medium mt-2">Design</span>
                         <span className="text-xs text-gray-500">50-500 units</span>
                       </div>
                       
-                      <div className="absolute flex flex-col items-center" style={{ right: "0%", top: "-40px" }}>
+                      <div className="absolute flex flex-col items-center" style={{
+                      right: "0%",
+                      top: "-40px"
+                    }}>
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Factory className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Production</span>
+                        <span className="text-sm font-medium mt-2">Prototype</span>
                         <span className="text-xs text-gray-500">1,000+ units</span>
                       </div>
                     </div>
@@ -289,8 +278,6 @@ const HowWeWork = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HowWeWork;
