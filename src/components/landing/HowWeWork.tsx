@@ -250,7 +250,7 @@ const HowWeWork = () => {
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Package className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Design</span>
+                        <span className="text-sm font-medium mt-2">Prototype</span>
                         <span className="text-xs text-gray-500">50-500 units</span>
                       </div>
                       
@@ -261,7 +261,7 @@ const HowWeWork = () => {
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
                           <Factory className="h-5 w-5" />
                         </div>
-                        <span className="text-sm font-medium mt-2">Prototype</span>
+                        <span className="text-sm font-medium mt-2">Production</span>
                         <span className="text-xs text-gray-500">1,000+ units</span>
                       </div>
                     </div>
