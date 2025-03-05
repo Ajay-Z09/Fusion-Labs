@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Upload, Database, BarChart, Printer, Factory, Video, Package, ShieldCheck, ArrowRight, CheckCircle2, ToggleLeft, ToggleRight } from "lucide-react";
+import { Upload, Database, BarChart, Printer, Factory, Video, Package, ShieldCheck, ArrowRight, CheckCircle2, ToggleLeft, ToggleRight, PenTool } from "lucide-react";
+
 const HowWeWork = () => {
   const [activePrototypingMethod, setActivePrototypingMethod] = useState<"printing" | "cnc" | "sheet">("printing");
   const [count, setCount] = useState(527);
@@ -226,7 +228,7 @@ const HowWeWork = () => {
                 <div className="flex-1 flex items-center">
                   <div className="w-full">
                     <div className="relative">
-                      <div className="h-2 bg-gray-200 rounded-full w-full"></div>
+                      {/* Removed the gray line */}
                       <div className="absolute h-2 bg-primary rounded-full" style={{
                       width: "100%"
                     }}></div>
@@ -236,10 +238,10 @@ const HowWeWork = () => {
                       top: "-40px"
                     }}>
                         <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-white">
-                          <Package className="h-5 w-5" />
+                          <PenTool className="h-5 w-5" />
                         </div>
                         <span className="text-sm font-medium mt-2">Design</span>
-                        <span className="text-xs text-gray-500">1-10 units</span>
+                        {/* Removed the units text */}
                       </div>
                       
                       <div className="absolute flex flex-col items-center" style={{
@@ -251,7 +253,7 @@ const HowWeWork = () => {
                           <Package className="h-5 w-5" />
                         </div>
                         <span className="text-sm font-medium mt-2">Prototype</span>
-                        <span className="text-xs text-gray-500">50-500 units</span>
+                        {/* Removed the units text */}
                       </div>
                       
                       <div className="absolute flex flex-col items-center" style={{
@@ -262,7 +264,7 @@ const HowWeWork = () => {
                           <Factory className="h-5 w-5" />
                         </div>
                         <span className="text-sm font-medium mt-2">Production</span>
-                        <span className="text-xs text-gray-500">1,000+ units</span>
+                        {/* Removed the units text */}
                       </div>
                     </div>
                   </div>
