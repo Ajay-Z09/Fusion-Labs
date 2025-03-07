@@ -27,15 +27,23 @@ const DesignStep = () => {
         </Button>
       </div>
       
-      <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-8 shadow-lg animate-slide-up h-80 flex items-center justify-center" style={{
+      <div className="relative rounded-xl overflow-hidden shadow-lg h-80 animate-slide-up" style={{
         animationDelay: "200ms"
       }}>
-        <div className="text-center">
-          <div className="inline-block p-4 bg-primary/20 rounded-full mb-4">
-            <Upload className="h-12 w-12 text-primary" />
+        <div className="absolute inset-0 flex">
+          <div className="w-1/2 bg-gray-100 flex items-center justify-center p-6 relative">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="Original CAD design" className="max-h-full object-contain" />
+            <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-md shadow text-xs font-medium">Original Design</div>
           </div>
-          <h4 className="text-xl font-semibold text-accent mb-2">Drag & Drop Your CAD Files</h4>
-          <p className="text-gray-600">Get instant optimization feedback and cost analysis</p>
+          <div className="w-1/2 bg-gray-50 flex items-center justify-center p-6 relative">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="AI-optimized design" className="max-h-full object-contain opacity-90" style={{
+              filter: "hue-rotate(120deg)"
+            }} />
+            <div className="absolute bottom-4 right-4 bg-primary px-3 py-1 rounded-md shadow text-xs font-medium text-white">AI-Optimized</div>
+          </div>
+        </div>
+        <div className="absolute top-4 right-4 bg-accent text-white px-3 py-2 rounded-full text-sm font-bold">
+          30% avg. cost reduction
         </div>
       </div>
     </div>
