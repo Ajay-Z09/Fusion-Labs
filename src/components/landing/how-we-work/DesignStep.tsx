@@ -32,7 +32,9 @@ const DesignStep = () => {
       }}>
         <div className="absolute inset-0 flex">
           <div className="w-1/2 bg-gray-100 flex items-center justify-center p-6 relative">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80" alt="Original CAD design" className="max-h-full object-contain" />
+            <div className="flex items-center justify-center w-full h-full bg-gray-200 rounded-lg">
+              <Upload className="h-12 w-12 text-gray-400" />
+            </div>
             <div className="absolute bottom-4 left-4 bg-white px-3 py-1 rounded-md shadow text-xs font-medium">Original Design</div>
           </div>
           <div className="w-1/2 bg-gray-50 flex items-center justify-center p-6 relative">
