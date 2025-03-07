@@ -17,9 +17,6 @@ const formSchema = z.object({
   phone: z.string().min(10, "Please enter a valid phone number"),
   industry: z.string().min(1, "Please select your industry"),
   projectStage: z.string().min(1, "Please select a project stage"),
-  timeline: z.string().min(1, "Please select your timeline"),
-  budget: z.string().min(1, "Please select your budget range"),
-  quantity: z.string().min(1, "Please enter your target quantity"),
   cadFile: z.instanceof(FileList).optional(),
   projectDetails: z.string().min(10, "Please provide more details about your project"),
 });
@@ -43,20 +40,6 @@ const projectStages = [
   "Seeking Manufacturing Partner"
 ];
 
-const timelines = [
-  "Immediate (< 1 month)",
-  "Short-term (1-3 months)",
-  "Medium-term (3-6 months)",
-  "Long-term (6+ months)"
-];
-
-const budgetRanges = [
-  "Under $10,000",
-  "$10,000 - $50,000",
-  "$50,000 - $100,000",
-  "$100,000+"
-];
-
 const trustElements = [
   "100% Confidentiality Guaranteed",
   "Free DFM Analysis",
@@ -76,9 +59,6 @@ export const QuoteForm = () => {
       phone: "",
       industry: "",
       projectStage: "",
-      timeline: "",
-      budget: "",
-      quantity: "",
       projectDetails: "",
     },
   });
@@ -223,71 +203,7 @@ export const QuoteForm = () => {
                   </FormItem>
                 )}
               />
-
-              <FormField
-                control={form.control}
-                name="timeline"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Timeline</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your timeline" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {timelines.map((timeline) => (
-                          <SelectItem key={timeline} value={timeline}>
-                            {timeline}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="budget"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Budget Range</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your budget range" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {budgetRanges.map((range) => (
-                          <SelectItem key={range} value={range}>
-                            {range}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
             </div>
-
-            <FormField
-              control={form.control}
-              name="quantity"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Target Production Quantity</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g., 1000 units/year" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <FormField
               control={form.control}
