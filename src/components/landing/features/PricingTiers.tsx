@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowRight, Check, Beaker, Bot, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,7 +10,7 @@ export const pricingTiers = [
     subtitle: "AI-Powered Prototyping",
     icon: Beaker,
     price: "$50",
-    unit: "base fee + $5/component",
+    unit: "per user/month",
     description: "For early-stage startups needing affordable, one-off prototyping.",
     features: [
       {
@@ -46,7 +45,7 @@ export const pricingTiers = [
   {
     name: "Fusion Pro",
     subtitle: "AI-Powered Prototyping",
-    icon: Bot, // Changed from Robot to Bot which is available in lucide
+    icon: Bot,
     price: "$75",
     unit: "per user/month",
     description: "For scaling startups needing rapid iteration and advanced tools.",
