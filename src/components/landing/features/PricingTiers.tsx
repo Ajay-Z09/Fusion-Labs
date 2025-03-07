@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 // Pricing and feature data
 export const pricingTiers = [
   {
-    name: "Starter Plan",
-    subtitle: "Per-Project Support",
-    icon: Beaker, // Changed from Flask to Beaker which is available in lucide
+    name: "Fusion Basic",
+    subtitle: "AI-Powered Prototyping",
+    icon: Beaker,
     price: "$50",
     unit: "base fee + $5/component",
     description: "For early-stage startups needing affordable, one-off prototyping.",
