@@ -52,6 +52,7 @@ const trustElements = [
 export const QuoteForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
   
   const form = useForm<QuoteFormValues>({
     resolver: zodResolver(formSchema),
@@ -69,6 +70,7 @@ export const QuoteForm = () => {
   const onSubmit = async (data: QuoteFormValues) => {
     try {
       setIsSubmitting(true);
+      console.log("Submitting form data:", data);
       
       // Handle file upload if present
       let cadFileUrl = null;
@@ -80,6 +82,7 @@ export const QuoteForm = () => {
         
         // Create a unique file path in the format: quote_submissions/{timestamp}_{filename}
         const filePath = `quote_submissions/${Date.now()}_${fileName}`;
+        console.log("Uploading file to:", filePath);
 
         // Upload the CAD file
         const { error: uploadError } = await supabase.storage
@@ -87,6 +90,7 @@ export const QuoteForm = () => {
           .upload(filePath, file);
           
         if (uploadError) {
+          console.error("File upload error:", uploadError);
           throw uploadError;
         }
         
@@ -96,9 +100,11 @@ export const QuoteForm = () => {
           .getPublicUrl(filePath);
           
         cadFileUrl = urlData.publicUrl;
+        console.log("File uploaded successfully, URL:", cadFileUrl);
       }
       
       // Submit form data to Supabase
+      console.log("Inserting data into quote_submissions table");
       const { error } = await supabase
         .from('quote_submissions')
         .insert({
@@ -113,8 +119,12 @@ export const QuoteForm = () => {
         });
         
       if (error) {
+        console.error("Database insert error:", error);
         throw error;
       }
+      
+      console.log("Form submitted successfully");
+      setSubmitSuccess(true);
       
       toast({
         title: "Quote Request Received",
@@ -157,17 +167,144 @@ export const QuoteForm = () => {
           ))}
         </div>
         
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-xl shadow-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {submitSuccess ? (
+          <div className="bg-white p-8 rounded-xl shadow-sm text-center">
+            <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-2">Quote Request Submitted!</h3>
+            <p className="text-gray-600 mb-6">
+              Thank you for your interest. Our team will review your project and get back to you within 24 hours.
+            </p>
+            <Button onClick={() => setSubmitSuccess(false)} variant="outline">Submit Another Request</Button>
+          </div>
+        ) : (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-xl shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="your@email.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Company</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your company name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+  
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your phone number" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+  
+                <FormField
+                  control={form.control}
+                  name="industry"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Industry</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your industry" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {industries.map((industry) => (
+                            <SelectItem key={industry} value={industry}>
+                              {industry}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+  
+                <FormField
+                  control={form.control}
+                  name="projectStage"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Project Stage</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select your project stage" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {projectStages.map((stage) => (
+                            <SelectItem key={stage} value={stage}>
+                              {stage}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+  
               <FormField
                 control={form.control}
-                name="name"
-                render={({ field }) => (
+                name="cadFile"
+                render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Upload CAD File (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="Your name" {...field} />
+                      <Input
+                        type="file"
+                        accept=".stl,.obj,.step,.stp,.iges,.igs,.dwg,.dxf"
+                        onChange={(e) => {
+                          const files = e.target.files;
+                          if (files?.length) {
+                            onChange(files);
+                          }
+                        }}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -176,151 +313,35 @@ export const QuoteForm = () => {
               
               <FormField
                 control={form.control}
-                name="email"
+                name="projectDetails"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Project Details</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="your@email.com" {...field} />
+                      <Textarea 
+                        placeholder="Tell us about your project, specific requirements, and any challenges you're facing" 
+                        className="min-h-[120px]"
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Company</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your company name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  "Submit Quote Request"
                 )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Your phone number" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="industry"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Industry</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your industry" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {industries.map((industry) => (
-                          <SelectItem key={industry} value={industry}>
-                            {industry}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="projectStage"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Project Stage</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your project stage" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {projectStages.map((stage) => (
-                          <SelectItem key={stage} value={stage}>
-                            {stage}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="cadFile"
-              render={({ field: { value, onChange, ...field } }) => (
-                <FormItem>
-                  <FormLabel>Upload CAD File (Optional)</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      accept=".stl,.obj,.step,.stp,.iges,.igs,.dwg,.dxf"
-                      onChange={(e) => {
-                        const files = e.target.files;
-                        if (files?.length) {
-                          onChange(files);
-                        }
-                      }}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="projectDetails"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Details</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Tell us about your project, specific requirements, and any challenges you're facing" 
-                      className="min-h-[120px]"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                "Submit Quote Request"
-              )}
-            </Button>
-          </form>
-        </Form>
+              </Button>
+            </form>
+          </Form>
+        )}
       </div>
     </section>
   );
