@@ -16,7 +16,6 @@ const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   company: z.string().min(1, "Company name is required"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
   industry: z.string().min(1, "Please select your industry"),
   projectStage: z.string().min(1, "Please select a project stage"),
   cadFile: z.instanceof(FileList).optional(),
@@ -60,7 +59,6 @@ export const QuoteForm = () => {
       name: "",
       email: "",
       company: "",
-      phone: "",
       industry: "",
       projectStage: "",
       projectDetails: "",
@@ -111,7 +109,6 @@ export const QuoteForm = () => {
           name: data.name,
           email: data.email,
           company: data.company,
-          phone: data.phone,
           industry: data.industry,
           project_stage: data.projectStage,
           project_details: data.projectDetails,
@@ -216,20 +213,6 @@ export const QuoteForm = () => {
                       <FormLabel>Company</FormLabel>
                       <FormControl>
                         <Input placeholder="Your company name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-  
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your phone number" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
