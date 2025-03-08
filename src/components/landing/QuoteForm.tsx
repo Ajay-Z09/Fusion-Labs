@@ -8,7 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -49,6 +51,7 @@ const trustElements = [
 
 export const QuoteForm = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const form = useForm<QuoteFormValues>({
     resolver: zodResolver(formSchema),
@@ -63,13 +66,72 @@ export const QuoteForm = () => {
     },
   });
 
-  const onSubmit = (data: QuoteFormValues) => {
-    console.log(data);
-    toast({
-      title: "Quote Request Received",
-      description: "Our team will contact you within 24 hours with your free DFM analysis.",
-    });
-    form.reset();
+  const onSubmit = async (data: QuoteFormValues) => {
+    try {
+      setIsSubmitting(true);
+      
+      // Handle file upload if present
+      let cadFileUrl = null;
+      
+      if (data.cadFile && data.cadFile.length > 0) {
+        const file = data.cadFile[0];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+        
+        // Create a unique file path in the format: quote_submissions/{timestamp}_{filename}
+        const filePath = `quote_submissions/${Date.now()}_${fileName}`;
+
+        // Upload the CAD file
+        const { error: uploadError } = await supabase.storage
+          .from('quote_submissions')
+          .upload(filePath, file);
+          
+        if (uploadError) {
+          throw uploadError;
+        }
+        
+        // Get the public URL for the uploaded file
+        const { data: urlData } = supabase.storage
+          .from('quote_submissions')
+          .getPublicUrl(filePath);
+          
+        cadFileUrl = urlData.publicUrl;
+      }
+      
+      // Submit form data to Supabase
+      const { error } = await supabase
+        .from('quote_submissions')
+        .insert({
+          name: data.name,
+          email: data.email,
+          company: data.company,
+          phone: data.phone,
+          industry: data.industry,
+          project_stage: data.projectStage,
+          project_details: data.projectDetails,
+          cad_file_url: cadFileUrl
+        });
+        
+      if (error) {
+        throw error;
+      }
+      
+      toast({
+        title: "Quote Request Received",
+        description: "Our team will contact you within 24 hours with your free DFM analysis.",
+      });
+      
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Something went wrong",
+        description: "Your quote request couldn't be submitted. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -247,7 +309,16 @@ export const QuoteForm = () => {
               )}
             />
             
-            <Button type="submit" className="w-full">Submit Quote Request</Button>
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                "Submit Quote Request"
+              )}
+            </Button>
           </form>
         </Form>
       </div>
