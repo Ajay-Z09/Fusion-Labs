@@ -147,8 +147,8 @@ export const PricingTierCard = ({ tier, scrollToQuoteForm }: { tier: typeof pric
         </div>
         
         <div className="mb-4">
-          <span className="text-3xl font-bold">{tier.price}</span>
-          {tier.unit && <span className="text-gray-500 ml-1">{tier.unit}</span>}
+          <span className="text-3xl font-bold block">{tier.price}</span>
+          {tier.unit && <span className="text-gray-500 text-sm">{tier.unit}</span>}
         </div>
         
         <p className="text-gray-600 mb-4">{tier.description}</p>
