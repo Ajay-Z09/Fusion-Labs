@@ -9,8 +9,8 @@ export const pricingTiers = [
     name: "Starter Plan",
     subtitle: "Per-Project Support",
     icon: Beaker, // Changed from Flask to Beaker which is available in lucide
-    price: "$50",
-    unit: "$50-500 per project",
+    price: "$50 - 500",
+    unit: "per project",
     description: "For early-stage startups needing affordable, one-off prototyping.",
     features: [
       {
