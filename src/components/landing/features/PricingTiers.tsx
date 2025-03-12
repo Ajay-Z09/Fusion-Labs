@@ -1,3 +1,4 @@
+
 import React from "react";
 import { ArrowRight, Check, Beaker, Bot, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ export const pricingTiers = [
     name: "Starter Plan",
     subtitle: "Per-Project Support",
     icon: Beaker, // Changed from Flask to Beaker which is available in lucide
-    price: "$50 - 500",
+    price: "$50-500",
     unit: "per project",
     description: "For early-stage startups needing affordable, one-off prototyping.",
     features: [
