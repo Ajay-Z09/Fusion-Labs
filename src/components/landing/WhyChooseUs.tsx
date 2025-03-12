@@ -24,7 +24,7 @@ const WhyChooseUs = () => {
       icon: <DollarSign className="h-8 w-8 text-primary" />,
       title: "Founder-Friendly Pricing",
       points: [
-        "$50 base fee + $5/part—no hidden costs.",
+        "$50-500 per project—no hidden costs.",
         "Equity partnerships for high-potential startups."
       ]
     },
