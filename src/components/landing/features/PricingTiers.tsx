@@ -125,43 +125,57 @@ export const PricingTierCard = ({ tier, scrollToQuoteForm }: { tier: typeof pric
   return (
     <div 
       className={cn(
-        "relative rounded-xl shadow-lg overflow-hidden transition-all hover:shadow-xl",
-        tier.popular ? "border-2 border-primary md:-mt-4 md:mb-4" : "border border-gray-200"
+        "relative rounded-2xl overflow-hidden transition-all hover:shadow-xl",
+        tier.popular ? "border-2 border-primary md:-mt-4 md:mb-4" : "border border-cyan-500/20"
       )}
     >
+      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent"></div>
       {tier.popular && (
-        <div className="absolute top-0 right-0 bg-primary text-white px-4 py-1 rounded-bl-lg font-medium text-sm">
+        <div className="absolute top-0 right-0 bg-cyan-500/80 text-white px-4 py-1 rounded-bl-lg font-medium text-sm z-10">
           Popular Choice
         </div>
       )}
-      
-      <div className="p-6 bg-gray-50">
-        <div className="flex items-center mb-4">
-          <div className={cn("p-2 rounded-lg mr-3", tier.color)}>
-            <IconComponent className="h-6 w-6 text-white" />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold">{tier.name}</h3>
-            <p className="text-gray-600">{tier.subtitle}</p>
-          </div>
-        </div>
+      <div className={cn(
+        "relative p-8",
+        tier.popular ? "bg-cyan-500/10" : ""
+      )}>
+        <div className={cn(
+          "absolute inset-0 blur-2xl opacity-30",
+          tier.popular ? "bg-cyan-500/20" : ""
+        )}></div>
         
-        <div className="mb-4">
-          <span className="text-3xl font-bold">{tier.price}</span>
-          {tier.unit && <span className="text-gray-500 ml-1">{tier.unit}</span>}
+        <div className="relative">
+          <div className="flex items-center mb-4">
+            <div className={cn("p-2 rounded-lg mr-3", tier.color)}>
+              <IconComponent className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold">{tier.name}</h3>
+              <p className="text-gray-600">{tier.subtitle}</p>
+            </div>
+          </div>
+          
+          <div className="mb-4">
+            <span className="text-3xl font-bold">{tier.price}</span>
+            {tier.unit && (
+              <div className="text-gray-500 text-sm">{tier.unit}</div>
+            )}
+          </div>
+          
+          <p className="text-gray-600 mb-4">{tier.description}</p>
         </div>
-        
-        <p className="text-gray-600 mb-4">{tier.description}</p>
       </div>
       
-      <div className="p-6 space-y-6">
+      <div className="p-6 space-y-6 relative">
         {tier.features.map((category, catIndex) => (
           <div key={catIndex}>
             <h4 className="font-medium text-gray-900 mb-2">{category.category}</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {category.items.map((item, itemIndex) => (
-                <li key={itemIndex} className="flex">
-                  <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                <li key={itemIndex} className="flex items-center gap-3">
+                  <div className="checkmark-animate relative">
+                    <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                  </div>
                   <span>{item}</span>
                 </li>
               ))}
